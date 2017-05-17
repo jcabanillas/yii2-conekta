@@ -10,14 +10,14 @@ class MyConekta
 
     function __construct()
     {
-        Conekta::setApiKey($this->apiKey);
+        \Conekta::setApiKey($this->apiKey);
     }
 
     //creating customer
     public function CreateCustomer($name, $email)
     {
         try {
-            $customer = Conekta_Customer::create(
+            $customer = \Conekta_Customer::create(
                 array(
                     'name' => $name,
                     'email' => $email,
@@ -27,7 +27,7 @@ class MyConekta
                 )
             );
             return $this->Response(1, $customer);
-        } catch (Conekta_Error $e) {
+        } catch (\Conekta_Error $e) {
             return $this->Response(0, $e);
 
         }
@@ -37,10 +37,10 @@ class MyConekta
     public function FindCustomer($cid)
     {
         try {
-            $customer = Conekta_Customer::find($cid);
+            $customer = \Conekta_Customer::find($cid);
             return $this->Response(1, $customer);
 
-        } catch (Conekta_Error $e) {
+        } catch (\Conekta_Error $e) {
             return $this->Response(0, $e);
         }
     }
@@ -56,7 +56,7 @@ class MyConekta
             try {
                 $card = $customer['data']->createCard(array('token' => $token));
                 return $this->Response(1, $card);
-            } catch (Conekta_Error $e) {
+            } catch (\Conekta_Error $e) {
                 return $this->Response(0, $e);
             }
         } else {
@@ -90,7 +90,7 @@ class MyConekta
                 );
                 return $this->Response(1, $customer);
 
-            } catch (Conekta_Error $e) {
+            } catch (\Conekta_Error $e) {
                 return $this->Response(0, $e);
 
             }
@@ -110,7 +110,7 @@ class MyConekta
                 $card = $customer['data']->cards[$index]->delete();
 
                 return $this->Response(1, $card);
-            } catch (Conekta_Error $e) {
+            } catch (\Conekta_Error $e) {
                 return $this->Response(0, $e);
             }
 
@@ -159,7 +159,7 @@ class MyConekta
         );
 
         try {
-            $response = Conekta_Charge::create($request);
+            $response = \Conekta_Charge::create($request);
 
             echo
                 'status=' . $response['status'] .
@@ -191,7 +191,7 @@ class MyConekta
             'cash' => array('type' => 'oxxo')
         );
         try {
-            $response = Conekta_Charge::create($request);
+            $response = \Conekta_Charge::create($request);
 
             echo
                 'status=' . $response['status'] .
@@ -215,7 +215,7 @@ class MyConekta
     public function card($paymentData)
     {
         try {
-            $charge = Conekta_Charge::create(array(
+            $charge = \Conekta_Charge::create(array(
                 'description' => $paymentData['description'],
                 'reference_id' => $paymentData['reference_id'],
                 'amount' => $paymentData['amount'],
@@ -226,7 +226,7 @@ class MyConekta
             ));
             echo 'Thanks for your donation';
             // return $this->Response(1, $charge);
-        } catch (Conekta_Error $e) {
+        } catch (\Conekta_Error $e) {
             echo $e->getMessage();
             // return $this->Response(0, $e);
         }
