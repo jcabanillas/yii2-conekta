@@ -6,7 +6,7 @@ require_once("lib/Conekta.php");
 class MyConekta
 {
 
-    private $apiKey = "key_v7Tu9yww6KSfd5fzZrpJzQ";
+    public $apiKey = "key_v7Tu9yww6KSfd5fzZrpJzQ";
 
     function __construct()
     {
