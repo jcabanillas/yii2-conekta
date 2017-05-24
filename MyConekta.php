@@ -224,11 +224,9 @@ class MyConekta
                 'card' => $paymentData['card'],
                 'details' => $paymentData['details']
             ));
-            echo 'Thanks for your donation';
-            // return $this->Response(1, $charge);
+            return true;
         } catch (\Conekta_Error $e) {
-            echo $e->getMessage();
-            // return $this->Response(0, $e);
+            return false;
         }
     }
 
